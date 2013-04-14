@@ -21,6 +21,17 @@
 (add-to-list 'load-path "~/elisp")
 (setq load-path (cons "~/elisp/geben-0.26" load-path))
 
+;; Load theme in Emacs 23
+;; (setq load-path (cons "~/elisp/color-theme-6.6.0" load-path))
+;; (setq load-path (cons "~/elisp/emacs-color-theme-solarized" load-path))
+;; (require 'color-theme-solarized)
+;; (color-theme-solarized-light)
+
+;; Load theme in Emacs 24
+(add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-solarized")
+(load-theme 'solarized-light t)
+
+
 ;;-------------------------------
 ;; Shell and Terminal Settings
 ;;-------------------------------
@@ -91,8 +102,11 @@
 ;; Strip out GUI elements
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
-(scroll-bar-mode -1)
-(tooltip-mode -1)
+
+;; Disable scroll bar and tooltip if there's a windowing system
+(when (display-graphic-p)
+  (scroll-bar-mode -1)  
+  (tooltip-mode -1))
 
 ;; Inhibit startup messages
 (setq inhibit-startup-echo-area-message t)
@@ -151,22 +165,23 @@
 ;;---------------------------
 ;; Fonts
 (set-frame-font "DejaVu Sans Mono-14")
-(set-face-font 'variable-pitch "Verdana-13")
+(when (display-graphic-p)
+  (set-face-font 'variable-pitch "Verdana-13"))
 
 ;; Font colors
-(setq font-lock-face-attributes
-      '((font-lock-builtin-face "dark magenta")
-        (font-lock-comment-deliminter-face "dark goldenrod")
-        (font-lock-comment-face "saddle brown")
-        (font-lock-constant-face "red")
-        ;;(font-lock-doc-face "")
-        (font-lock-function-name-face "blue")
-        (font-lock-keyword-face "dark orange")
-        (font-lock-string-face "forest green")
-        (font-lock-type-face "medium blue")
-        (font-lock-variable-name-face "firebrick")))
-;; Background color
-(set-background-color "old lace")
+;; (setq font-lock-face-attributes
+;;       '((font-lock-builtin-face "dark magenta")
+;;         (font-lock-comment-deliminter-face "dark goldenrod")
+;;         (font-lock-comment-face "saddle brown")
+;;         (font-lock-constant-face "red")
+;;         ;;(font-lock-doc-face "")
+;;         (font-lock-function-name-face "blue")
+;;         (font-lock-keyword-face "dark orange")
+;;         (font-lock-string-face "forest green")
+;;         (font-lock-type-face "medium blue")
+;;         (font-lock-variable-name-face "firebrick")))
+;; ;; Background color
+;; (set-background-color "old lace")
 
 ;; Syntax highlighting everywhere
 (global-font-lock-mode t)
