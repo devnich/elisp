@@ -28,8 +28,8 @@
 ;; (color-theme-solarized-light)
 
 ;; Load theme in Emacs 24
-(add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-solarized")
-(load-theme 'solarized-light t)
+(add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-roc")
+(load-theme 'roc-light t)
 
 
 ;;-------------------------------
@@ -47,6 +47,7 @@
 
 ;; Invoke the shells
 (eshell)
+(rename-buffer "* ~$")
 ;; (shell)
 
 ;; Use multi-term to handle multiple terminal instances
