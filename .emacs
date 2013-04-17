@@ -13,7 +13,7 @@
 ;;  ESS, emacs-goodies
 ;;  
 ;; Available from the web:
-;;  autopair, js2-mode, diff-mode-, multi-term, php-mode, virtualenv, geben
+;;  autopair, js2-mode, diff-mode-, multi-term, php-mode, virtualenv, geben, 
 
 ;;-------------------------------
 ;; Get elisp files
@@ -21,16 +21,17 @@
 (add-to-list 'load-path "~/elisp")
 (setq load-path (cons "~/elisp/geben-0.26" load-path))
 
-;; Load theme in Emacs 23
-;; (setq load-path (cons "~/elisp/color-theme-6.6.0" load-path))
-;; (setq load-path (cons "~/elisp/emacs-color-theme-solarized" load-path))
-;; (require 'color-theme-solarized)
-;; (color-theme-solarized-light)
-
 ;; Load theme in Emacs 24
-(add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-roc")
-(load-theme 'roc-light t)
-
+(if (> emacs-major-version 23)
+    (progn
+      (add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-roc")
+      (load-theme 'roc-light t))
+  ;; Load theme in Emacs 23
+  (progn
+    (setq load-path (cons "~/elisp/color-theme-6.6.0" load-path))
+    (setq load-path (cons "~/ethemes/emacs-color-theme-roc" load-path))
+    ;; (require 'color-theme-roc)
+    (color-theme-solarized-light)))
 
 ;;-------------------------------
 ;; Shell and Terminal Settings
@@ -52,7 +53,7 @@
 
 ;; Use multi-term to handle multiple terminal instances
 (require 'multi-term)
-(setq multi-term-program "/bin/bash")           ;; use bash in terminal
+(setq multi-term-program "/bin/zsh")            ;; use bash in terminal
 (global-set-key (kbd "C-c T") 'multi-term)      ;; create new terminal buffer
 (global-set-key (kbd "C-c t") 'multi-term-next) ;; switch terminals
 
