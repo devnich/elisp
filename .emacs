@@ -18,20 +18,26 @@
 ;;-------------------------------
 ;; Get elisp files
 ;;-------------------------------
-(add-to-list 'load-path "~/elisp")
-(setq load-path (cons "~/elisp/geben-0.26" load-path))
+;; Find correct directory paths
+(if (file-directory-p "/home/gilgamesh")
+    (defcustom homedir "/home/gilgamesh/" "set user's absolute directory")
+  (defcustom homedir "/home/ewa/" "set user's absolute directory")
+  )
+
+(add-to-list 'load-path (concat homedir "elisp"))
+(setq load-path (cons (concat homedir "elisp/geben-0.26") load-path))
 
 ;; Load theme in Emacs 24
 (if (> emacs-major-version 23)
     (progn
-      (add-to-list 'custom-theme-load-path "~/ethemes/emacs-color-theme-roc")
+      (add-to-list 'custom-theme-load-path (concat homedir "ethemes/emacs-color-theme-roc"))
       (load-theme 'roc-light t))
-  ;; Load theme in Emacs 23
+  ;; Load theme in Emacs 23 (invoke with M-x color-theme-roc)
   (progn
-    (setq load-path (cons "~/elisp/color-theme-6.6.0" load-path))
-    (setq load-path (cons "~/ethemes/emacs-color-theme-roc" load-path))
-    ;; (require 'color-theme-roc)
-    (color-theme-solarized-light)))
+    (setq load-path (cons (concat homedir "ethemes/emacs-color-theme-roc") load-path))
+    (require 'color-theme-roc))
+  )
+
 
 ;;-------------------------------
 ;; Shell and Terminal Settings
@@ -84,7 +90,6 @@
 (autopair-global-mode)
 (add-hook 'shell-script-mode-hook
           '(lambda () (autopair-mode)))
-          ;; #'(lambda () (autopair-mode)))
 
 ;; Suppress autopair in term mode
 (add-hook 'term-mode-hook
@@ -170,7 +175,7 @@
 (when (display-graphic-p)
   (set-face-font 'variable-pitch "Verdana-13"))
 
-;; Font colors
+;; Old hard-coded font colors
 ;; (setq font-lock-face-attributes
 ;;       '((font-lock-builtin-face "dark magenta")
 ;;         (font-lock-comment-deliminter-face "dark goldenrod")
@@ -182,7 +187,6 @@
 ;;         (font-lock-string-face "forest green")
 ;;         (font-lock-type-face "medium blue")
 ;;         (font-lock-variable-name-face "firebrick")))
-;; ;; Background color
 ;; (set-background-color "old lace")
 
 ;; Syntax highlighting everywhere
@@ -361,12 +365,6 @@
 (setq org-agenda-todo-list-sublevels nil)
 (setq org-todo-keywords
        '((sequence "TODO" "|" "Done" "Won't fix" "Superseded")))
-;; (setq org-agenda-files (list "~/Dropbox/Home.org"
-;;                              "~/Dropbox/Dissertation.org"
-;;                              "~/Dropbox/GalloGeneral.org"
-;;                              "~/Dropbox/Segmentation.org"
-;;                              "~/Dropbox/BrandHealth.org"
-;;                              "~/Dropbox/CustomerHealth.org"))
 
 ;;---------------------------
 ;; Haskell
@@ -477,56 +475,8 @@
 ;; Mail
 ;;------------------------
 ;; wanderlust
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
-
 ;; IMAP
-(setq elmo-imap4-default-server "imap.gmail.com")
-(setq elmo-imap4-default-user "devnich@gmail.com") 
-(setq elmo-imap4-default-authenticate-type 'clear) 
-(setq elmo-imap4-default-port '993)
-(setq elmo-imap4-default-stream-type 'ssl)
-
-(setq elmo-imap4-use-modified-utf7 t)
-
-;; Hacks
-;; (setq starttls-use-gnutls t)
-;; (setq starttls-gnutls-program "gnutls-cli")
-;; (setq starttls-extra-arguments '("--insecure"))
-;; (setq
-;;  ssl-certificate-verification-policy 1
-;;  ssl-program-name "gnutls-cli"
-;;  ssl-program-arguments '("-p" service host))
-
 ;; SMTP
-(setq wl-smtp-connection-type 'starttls)
-(setq wl-smtp-posting-port 587)
-(setq wl-smtp-authenticate-type "plain")
-(setq wl-smtp-posting-user "mattofransen")
-(setq wl-smtp-posting-server "smtp.gmail.com")
-(setq wl-local-domain "gmail.com")
-(setq wl-message-id-domain "gmail.com")
-
-(setq wl-default-folder "%inbox")
-(setq wl-default-spec "%")
-(setq wl-draft-folder "%[Gmail]/Drafts") ; Gmail IMAP
-(setq wl-trash-folder "%[Gmail]/Trash")
-
-(setq wl-folder-check-async t) 
-
-(setq elmo-imap4-use-modified-utf7 t)
-
-(autoload 'wl-user-agent-compose "wl-draft" nil t)
-(if (boundp 'mail-user-agent)
-    (setq mail-user-agent 'wl-user-agent))
-(if (fboundp 'define-mail-user-agent)
-    (define-mail-user-agent
-      'wl-user-agent
-      'wl-user-agent-compose
-      'wl-draft-send
-      'wl-draft-kill
-      'mail-send-hook))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
