@@ -19,22 +19,22 @@
 ;; Get elisp files
 ;;-------------------------------
 ;; Find correct directory paths
-(if (file-directory-p "/home/gilgamesh")
-    (defcustom homedir "/home/gilgamesh/" "set user's absolute directory")
-  (defcustom homedir "/home/ewa/" "set user's absolute directory")
+(if (equal (getenv "USER") "root")
+    (defcustom homedir "/home/ewa" "set user's absolute directory")
+  (defcustom homedir (getenv "HOME") "set user's absolute directory")
   )
 
-(add-to-list 'load-path (concat homedir "elisp"))
-(setq load-path (cons (concat homedir "elisp/geben-0.26") load-path))
+(add-to-list 'load-path (concat homedir "/elisp"))
+(setq load-path (cons (concat homedir "/elisp/geben-0.26") load-path))
 
 ;; Load theme in Emacs 24
 (if (> emacs-major-version 23)
     (progn
-      (add-to-list 'custom-theme-load-path (concat homedir "ethemes/emacs-color-theme-roc"))
+      (add-to-list 'custom-theme-load-path (concat homedir "/ethemes/emacs-color-theme-roc"))
       (load-theme 'roc-light t))
   ;; Load theme in Emacs 23 (invoke with M-x color-theme-roc)
   (progn
-    (setq load-path (cons (concat homedir "ethemes/emacs-color-theme-roc") load-path))
+    (setq load-path (cons (concat homedir "/ethemes/emacs-color-theme-roc") load-path))
     (require 'color-theme-roc))
   )
 
@@ -113,7 +113,8 @@
 ;; Disable scroll bar and tooltip if there's a windowing system
 (when (display-graphic-p)
   (scroll-bar-mode -1)  
-  (tooltip-mode -1))
+  (tooltip-mode -1)
+  )
 
 ;; Inhibit startup messages
 (setq inhibit-startup-echo-area-message t)
