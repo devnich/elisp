@@ -123,6 +123,9 @@
 ;; Sort Buffer menu by name column
 (setq Buffer-menu-sort-column 2)
 
+;; Set which flags are passed to ls for dired display
+(setq dired-listing-switches "-alk")
+
 ;; Show column numbers
 (column-number-mode 1)
 
