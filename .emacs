@@ -34,6 +34,7 @@
       (load-theme 'roc-light t))
   ;; Load theme in Emacs 23 (invoke with M-x color-theme-roc)
   (progn
+    (setq load-path (cons (concat homedir "/elisp/color-theme-6.6.0") load-path))
     (setq load-path (cons (concat homedir "/ethemes/emacs-color-theme-roc") load-path))
     (require 'color-theme-roc))
   )
@@ -163,13 +164,17 @@
 ;;-------------------------------
 ;; Toggle sudo in dired mode
 ;;-------------------------------
-(require 'dired-toggle-sudo)
-(define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
-(eval-after-load 'tramp
- '(progn
-    ;; Allow to use: /sudo:user@host:/path/to/file
-    (add-to-list 'tramp-default-proxies-alist
-		  '(".*" "\\`.+\\'" "/ssh:%h:"))))
+(if (> emacs-major-version 23)
+    (progn
+      (require 'dired-toggle-sudo)
+      (define-key dired-mode-map (kbd "C-c C-s") 'dired-toggle-sudo)
+      (eval-after-load 'tramp
+        '(progn
+           ;; Allow to use: /sudo:user@host:/path/to/file
+           (add-to-list 'tramp-default-proxies-alist
+                        '(".*" "\\`.+\\'" "/ssh:%h:"))))
+      )
+  )
 
 ;;---------------------------
 ;; Fonts and face decoration
