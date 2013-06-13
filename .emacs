@@ -13,7 +13,7 @@
 ;;  ESS, emacs-goodies
 ;;  
 ;; Available from the web:
-;;  autopair, js2-mode, diff-mode-, multi-term, php-mode, virtualenv, geben, 
+;;  autopair, js2-mode, diff-mode-, multi-term, php-mode, virtualenv, geben, color-theme, dired-toggle-sudo, grails-mode, groovy-eval, groovy-mode, groovy-electric, inf-groovy
 
 ;;-------------------------------
 ;; Get elisp files
@@ -94,15 +94,27 @@
 
 ;; Suppress autopair in term mode
 (add-hook 'term-mode-hook
-          '(lambda () (setq autopair-dont-activate t)))
+          #'(lambda ()
+              ;; Disable in <24
+              (setq autopair-dont-activate t)
+              ;; Disable in >=24
+              (autopair-mode -1)))
 
 ;; Suppress autopair in js2 mode (redundant)
 (add-hook 'js2-mode-hook
-          '(lambda () (setq autopair-dont-activate t)))
+          #'(lambda ()
+              ;; Disable in <24
+              (setq autopair-dont-activate t)
+              ;; Disable in >=24
+              (autopair-mode -1)))
 
 ;; Suppress autopair in groovy mode (use groovy-electric)
 (add-hook 'groovy-mode-hook
-          '(lambda () (setq autopair-dont-activate t)))
+          #'(lambda ()
+              ;; Disable in <24
+              (setq autopair-dont-activate t)
+              ;; Disable in >=24
+              (autopair-mode -1)))
 
 ;;---------------------------
 ;; Look and feel customizations
@@ -279,6 +291,11 @@
 (add-hook 'groovy-mode-hook
           '(lambda ()
              (inf-groovy-keys)))
+
+;; Load Groovy eval mode
+(autoload 'groovy-eval "groovy-eval" "Groovy Evaluation" t)
+(add-hook 'groovy-mode-hook 'groovy-eval)
+
 
 ;;---------------------------
 ;; PHP

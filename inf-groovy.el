@@ -248,7 +248,7 @@ of `groovy-program-name').  Runs the hooks `inferior-groovy-mode-hook'
 	(insert-before-markers str)
 	(move-marker comint-last-input-end (point))
 	(comint-send-string proc str)
-	(comint-send-string proc "go\n")
+	;; (comint-send-string proc "go\n")
 	)
       )
     )))
