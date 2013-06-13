@@ -262,16 +262,23 @@
 ;;---------------------------
 ;; Groovy mode
 ;;---------------------------
-;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
+;; Use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
-;;; make Groovy mode electric by default.
+;; Make Groovy mode electric by default.
 (add-hook 'groovy-mode-hook
           '(lambda ()
              (require 'groovy-electric)
              (groovy-electric-mode)))
+
+ ;; Load inf-groovy and set inf-groovy key definition in groovy-mode.
+(autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
+(autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
+(add-hook 'groovy-mode-hook
+          '(lambda ()
+             (inf-groovy-keys)))
 
 ;;---------------------------
 ;; PHP
