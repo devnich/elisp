@@ -25,6 +25,7 @@
   )
 
 (add-to-list 'load-path (concat homedir "/elisp"))
+(add-to-list 'load-path (concat homedir "/elisp/autocomplete"))
 (setq load-path (cons (concat homedir "/elisp/geben-0.26") load-path))
 
 ;; Load theme in Emacs 24
@@ -39,6 +40,37 @@
     (require 'color-theme-roc))
   )
 
+
+;;-------------------------------
+;; CEDET experimentation
+;;-------------------------------
+;; Enable built-in CEDET
+(global-ede-mode 1)
+;; (require 'semantic/sb) ;; not required?
+(semantic-mode 1)
+
+;; Semantic
+(global-semantic-idle-completions-mode t)
+(global-semantic-decoration-mode t)
+(global-semantic-highlight-func-mode t)
+(global-semantic-show-unmatched-syntax-mode t)
+
+;; CC-mode
+(add-hook 'c-mode-hook '(lambda ()
+        (setq ac-sources (append '(ac-source-semantic) ac-sources))
+        (local-set-key (kbd "RET") 'newline-and-indent)
+        (linum-mode t)
+        (semantic-mode t)))
+
+;; Autocomplete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories (concat homedir "/elisp/dict"))
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; JDEE experimentation
+;; (add-to-list 'load-path (concat homedir "/elisp/jdee-2.4.1/lisp"))
+;; (load "jde")
 
 ;;-------------------------------
 ;; Shell and Terminal Settings
