@@ -324,11 +324,6 @@
           '(lambda ()
              (inf-groovy-keys)))
 
-;; Load Groovy eval mode
-(autoload 'groovy-eval "groovy-eval" "Groovy Evaluation" t)
-(add-hook 'groovy-mode-hook 'groovy-eval)
-
-
 ;;---------------------------
 ;; PHP
 ;;---------------------------
