@@ -40,6 +40,9 @@
     (require 'color-theme-roc))
   )
 
+;; Color references for 256-color terminal:
+;; http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png
+;; http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 ;;-------------------------------
 ;; CEDET experimentation
@@ -323,6 +326,7 @@
 (add-hook 'groovy-mode-hook
           '(lambda ()
              (inf-groovy-keys)))
+;; '(auto-complete-mode 1)
 
 ;;---------------------------
 ;; PHP
