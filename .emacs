@@ -193,6 +193,12 @@
 (setq display-time-12hr-format t)
 (display-time)
 
+;; Add hostname to menu bar
+(define-key global-map [menu-bar host]
+  (cons (concat "<< @" system-name " >>")
+        (make-sparse-keymap system-name)))
+
+
 ;;---------------------------
 ;; Custom key bindings
 ;;---------------------------
