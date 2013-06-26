@@ -65,7 +65,6 @@
 (add-hook 'c-mode-hook '(lambda ()
         (setq ac-sources (append '(ac-source-semantic) ac-sources))
         (local-set-key (kbd "RET") 'newline-and-indent)
-        (linum-mode t)
         (semantic-mode t)))
 
 ;; Autocomplete
