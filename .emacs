@@ -71,7 +71,6 @@
 ;; Autocomplete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (concat homedir "/elisp/dict"))
-(require 'auto-complete-config)
 (ac-config-default)
 
 ;; JDEE experimentation
@@ -195,7 +194,7 @@
 
 ;; Add hostname to menu bar
 (define-key global-map [menu-bar host]
-  (cons (concat "<< @" system-name " >>")
+  (cons (concat "< " system-name " >")
         (make-sparse-keymap system-name)))
 
 
