@@ -37,7 +37,8 @@
   (progn
     (setq load-path (cons (concat homedir "/elisp/color-theme-6.6.0") load-path))
     (setq load-path (cons (concat homedir "/ethemes/emacs-color-theme-roc") load-path))
-    (require 'color-theme-roc))
+    (require 'color-theme-roc)
+    (color-theme-roc-light))
   )
 
 ;; Color references for 256-color terminal:
