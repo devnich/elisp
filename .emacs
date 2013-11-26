@@ -46,32 +46,35 @@
 ;; http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 ;;-------------------------------
-;; CEDET experimentation
-;;-------------------------------
 ;; Enable built-in CEDET
-(global-ede-mode 1)
-;; (require 'semantic/sb) ;; not required?
-(semantic-mode 1)
-
-;; Semantic
-(if (> emacs-major-version 23)
+;;-------------------------------
+;; 
+(if (>= (string-to-number emacs-version) 23.2)
     (progn
+      (global-ede-mode 1)
+      ;; (require 'semantic/sb) ;; not required?
+      (semantic-mode 1)
+
+      ;; Semantic
+      ;; (if (> emacs-major-version 23)
+      ;;     (progn
       (global-semantic-idle-completions-mode t)
       (global-semantic-decoration-mode t)
       (global-semantic-highlight-func-mode t)
       (global-semantic-show-unmatched-syntax-mode t)
+      ;; ))
+
+      ;; CC-mode
+      (add-hook 'c-mode-hook '(lambda ()
+                                (setq ac-sources (append '(ac-source-semantic) ac-sources))
+                                (local-set-key (kbd "RET") 'newline-and-indent)
+                                (semantic-mode t)))
+
+      ;; Autocomplete
+      (require 'auto-complete-config)
+      (add-to-list 'ac-dictionary-directories (concat homedir "/elisp/dict"))
+      (ac-config-default)
       ))
-
-;; CC-mode
-(add-hook 'c-mode-hook '(lambda ()
-        (setq ac-sources (append '(ac-source-semantic) ac-sources))
-        (local-set-key (kbd "RET") 'newline-and-indent)
-        (semantic-mode t)))
-
-;; Autocomplete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories (concat homedir "/elisp/dict"))
-(ac-config-default)
 
 ;; JDEE experimentation
 ;; (add-to-list 'load-path (concat homedir "/elisp/jdee-2.4.1/lisp"))
@@ -92,7 +95,7 @@
 
 ;; Invoke the shells
 (eshell)
-(rename-buffer "* ~$")
+(rename-buffer "~$")
 ;; (shell)
 
 ;; Use multi-term to handle multiple terminal instances
@@ -171,10 +174,10 @@
 (setq inhibit-startup-message t)
 
 ;; Sort Buffer menu by name column
-(setq Buffer-menu-sort-column 2)
+;; (setq Buffer-menu-sort-column 2)
 
 ;; Set which flags are passed to ls for dired display
-(setq dired-listing-switches "-alk")
+(setq dired-listing-switches "-al --block-size=1M --group-directories-first")
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -197,6 +200,27 @@
   (cons (concat (getenv "USER") "@" system-name "   ")
         (make-sparse-keymap system-name)))
 
+;;---------------------------
+;; Dired enhancements
+;;---------------------------
+;; Use ido-mode for autocompletion
+(ido-mode)
+
+;; Use ibuffer instead of buffer list
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(defalias 'list-buffers 'ibuffer)
+
+;; (global-set-key (kbd "C-x C-b") 'ibuffer-other-window)
+
+;; Switching to ibuffer puts the cursor on the most recent buffer
+(defadvice ibuffer (around ibuffer-point-to-most-recent) ()
+  "Open ibuffer with cursor pointed to most recent buffer name"
+  (let ((recent-buffer-name (buffer-name)))
+    ad-do-it
+    (ibuffer-jump-to-buffer recent-buffer-name)))
+(ad-activate 'ibuffer)
+
+;; (setq ibuffer-default-sorting-mode 'major-mode)
 
 ;;---------------------------
 ;; Custom key bindings
