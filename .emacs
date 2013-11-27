@@ -220,7 +220,22 @@
     (ibuffer-jump-to-buffer recent-buffer-name)))
 (ad-activate 'ibuffer)
 
-;; (setq ibuffer-default-sorting-mode 'major-mode)
+(setq ibuffer-display-summary nil)
+
+(setq ibuffer-formats 
+      '((mark modified " "
+              (name 30 30 :left)
+              " "
+	      (mode 16 16 :left :elide)
+	      " "
+              filename-and-process)
+	(mark modified " "
+              (mode 16 16 :left :elide)
+	      " "
+              filename-and-process))
+)
+
+;; (setq ibuffer-default-sorting-mode 'lexicographic)
 
 ;;---------------------------
 ;; Custom key bindings
