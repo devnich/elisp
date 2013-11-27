@@ -58,10 +58,10 @@
       ;; Semantic
       ;; (if (> emacs-major-version 23)
       ;;     (progn
-      (global-semantic-idle-completions-mode t)
-      (global-semantic-decoration-mode t)
-      (global-semantic-highlight-func-mode t)
-      (global-semantic-show-unmatched-syntax-mode t)
+      (global-semantic-idle-completions-mode 1)
+      (global-semantic-decoration-mode 1)
+      (global-semantic-highlight-func-mode 1)
+      (global-semantic-show-unmatched-syntax-mode 1)
       ;; ))
 
       ;; CC-mode
