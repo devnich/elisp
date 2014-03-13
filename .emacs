@@ -178,6 +178,8 @@
 
 ;; Set which flags are passed to ls for dired display
 (setq dired-listing-switches "-al --block-size=1M --group-directories-first")
+;; This will remove owners, if they're taking up too much space:
+;; (setq dired-listing-switches "-ag --block-size=1M --no-group --group-directories-first")
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -192,8 +194,8 @@
 (setq x-select-enable-clipboard t)
 
 ;; Show clock
-(setq display-time-12hr-format t)
-(display-time)
+;; (setq display-time-12hr-format t)
+;; (display-time)
 
 ;; Add hostname to menu bar
 (define-key global-map [menu-bar host]
