@@ -19,8 +19,9 @@
 ;; Get elisp files
 ;;-------------------------------
 ;; Find correct directory paths
+;; (member "gilgamesh" (system-users))
 (if (equal (getenv "USER") "root")
-    (defcustom homedir "/home/ewa" "set user's absolute directory")
+    (defcustom homedir "/home/gilgamesh" "set user's absolute directory")
   (defcustom homedir (getenv "HOME") "set user's absolute directory")
   )
 
@@ -178,7 +179,6 @@
 
 ;; Set which flags are passed to ls for dired display
 (setq dired-listing-switches "-al --block-size=1M --group-directories-first")
-;; This will remove owners, if they're taking up too much space:
 ;; (setq dired-listing-switches "-ag --block-size=1M --no-group --group-directories-first")
 
 ;; Show column numbers
@@ -380,6 +380,22 @@
 ;;---------------------------
 ;; PHP
 ;;---------------------------
+;;-------------------------------
+;; Generic mode for drush make .info/.make
+;;-------------------------------
+(define-generic-mode
+  'info-mode
+  '(";")  ;; comment
+  nil
+  '(("projects" . 'font-lock-builtin-face)
+    ("libraries" . 'font-lock-builtin-face)
+    ("core" . 'font-lock-builtin-face)
+    ("api" . 'font-lock-builtin-face)) ;; operators and builtins
+  '(".info\\'" ".make\\'")
+  nil
+  "A mode for Drush .make and .info files"
+)
+
 ;;---------------------------
 ;; PHP mode (actually "improved PHP mode" by David House)
 ;;---------------------------
@@ -390,6 +406,29 @@
 (add-to-list 'auto-mode-alist '("\\.profile$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
 
+;; Alternatively, use mixed multi-mode:
+;;  https://github.com/traceypooh/php-htm-mode
+
+(require 'php-doc)
+(add-hook 'php-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-p") 'php-insert-doc-block)))
+
+
+;; Fix annoying indentation
+(add-hook 'php-mode-hook (lambda ()
+    (defun ywb-php-lineup-arglist-intro (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (+ (current-column) c-basic-offset))))
+    (defun ywb-php-lineup-arglist-close (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (current-column))))
+    (c-set-offset 'arglist-intro 'ywb-php-lineup-arglist-intro)
+    (c-set-offset 'arglist-close 'ywb-php-lineup-arglist-close)))
+
+
 (autoload 'geben "geben" "DBGp protocol frontend, a script debugger" t)
 ;; Debug a simple PHP script.
 ;; Change the session key "idekey" to any session key text you like
@@ -398,7 +437,7 @@
   (interactive)
   (call-interactively 'geben)
   (shell-command
-    (concat "XDEBUG_CONFIG='idekey=emacs-xdebug' /usr/bin/php5 "
+    (concat "XDEBUG_CONFIG='idekey=emac-geben' /usr/bin/php5 "
     (buffer-file-name) " &"))
   )
 
@@ -415,6 +454,7 @@
   (process-send-string nil "php -a \n")
   (rename-buffer "*PHP Shell*")
   (php-shell-mode)
+  ;; (autopair-mode)
   )
 
 (defun send-to-php-shell ()
@@ -427,8 +467,17 @@
     )
   )
 
+(defun php-shell-nice-returns ()
+  "Provide nice newline behavior in the interactive shell"
+  (interactive)
+  (term-line-mode)
+  (insert " . \"\\n\";")
+  (term-char-mode)
+  )
+
 (define-key php-mode-map (kbd "C-c C-s") 'my-php-shell)
 (define-key php-mode-map (kbd "C-c C-c") 'send-to-php-shell)
+;; (define-key php-mode-map (kbd "C-;") 'php-shell-nice-returns)
 
 ;;---------------------------
 ;; PHP interactive shell minor mode
@@ -438,24 +487,13 @@
   ;; The initial value.
   :init-value nil
   ;; The indicator for the mode line.
-  :lighter " phpshell"
+  :lighter " php-shell"
   ;; The minor mode bindings.
   :keymap
   '(([?\;] . php-shell-nice-returns)
-    ;; ([C-M-backspace]
-    ;;  . (lambda ()
-    ;;      (interactive)
-    ;;      (php-shell-nice-returns t)))
     )
   :group 'php-minor)
 
-(defun php-shell-nice-returns ()
-  "Provide nice newline behavior in the interactive shell"
-  (interactive)
-  (term-line-mode)
-  (insert " . \"\\n\";")
-  (term-char-mode)
-  )
 
 ;;---------------------------
 ;; Restructured Text mode
