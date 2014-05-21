@@ -506,6 +506,16 @@
 (setq rst-mode-lazy nil)
 
 ;;---------------------------
+;; Dictionary mode
+;;---------------------------
+;; c.f. http://jsomers.net/blog/dictionary
+;; Install sdcv
+;; Download http://abloz.com/huzheng/stardict-dic/dict.org/stardict-dictd-web1913-2.4.2.tar.bz2
+;; Untar inside 
+(require 'sdcv-mode)
+(global-set-key (kbd "C-c d") 'sdcv-search)
+
+;;---------------------------
 ;; Org mode
 ;;---------------------------
 (require 'org-install)
