@@ -49,7 +49,7 @@
 ;;-------------------------------
 ;; Enable built-in CEDET
 ;;-------------------------------
-;; 
+
 (if (>= (string-to-number emacs-version) 23.2)
     (progn
       (global-ede-mode 1)
@@ -376,6 +376,15 @@
           '(lambda ()
              (inf-groovy-keys)))
 ;; '(auto-complete-mode 1)
+
+
+;;---------------------------
+;; XML and related things
+;;---------------------------
+;; associate xml, xsd, etc with nxml-mode
+(add-to-list 'auto-mode-alist (cons (concat "\\." (regexp-opt '("xml" "xsd" "rng" "xslt" "xsl") t) "\\'") 'nxml-mode))
+(setq nxml-slash-auto-complete-flag t)
+
 
 ;;---------------------------
 ;; PHP
