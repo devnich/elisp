@@ -1,0 +1,40 @@
+[global_config]
+  window_state = fullscreen
+  borderless = True
+[keybindings]
+  copy = <Ctrl><Shift>w
+  paste = <Ctrl><Shift>y
+[profiles]
+  [[solarized_dark]]
+    color_scheme = solarized_dark
+    font = DejaVu Sans Mono 14
+    use_system_font = False
+    scrollbar_position = disabled
+    scroll_on_keystroke = False
+    scrollback_infinite = True
+  [[default]]
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    font = DejaVu Sans Mono 14
+    use_system_font = False
+    foreground_color = "#ffffff"
+    scrollbar_position = disabled
+    scroll_on_keystroke = False
+    scrollback_infinite = True
+  [[roc-light]]
+    palette = "#af875f:#ff8700:#d70000:#d700af:#8700ff:#0000ff:#5fafd7:#008700:#1c1c1c:#262626:#585858:#626262:#808080:#8a8a8a:#e4e4e4:#ffffdf"
+    background_darkness = 0.0
+    use_system_font = False
+    foreground_color = "#002b36"
+    font = DejaVu Sans Mono 14
+    background_color = "#fdf5e6"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
+
+
