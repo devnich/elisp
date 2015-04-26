@@ -1,9 +1,8 @@
 (set-frame-font "DejaVu Sans Mono-13")
 
 ;; Invoke the shells
-;; (eshell)
-;; (rename-buffer "~$")
-;; Invoke multi-term
-;; Add zsh shell
+(add-hook 'emacs-startup-hook 'eshell)
+
+;; Invoke multi-term and add zsh shell - add a multi-term-init.el
 
 (provide 'init-local)
