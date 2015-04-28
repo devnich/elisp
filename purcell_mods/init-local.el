@@ -9,6 +9,7 @@
 ;;   http://emacsredux.com/blog/2013/04/21/edit-files-as-root/ option B
 
 ;; Find keyboard eval shortcut for scratch buffer
+;;C-j 'eval-print-last-sexp
 
 ;; Move cursor to most recently opened file in ibuffer
 
