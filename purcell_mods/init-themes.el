@@ -45,7 +45,6 @@ ignored: use `custom-enabled-themes' instead."
 ;;------------------------------------------------------------------------------
 
 ;; If you don't customize it, this is the theme you get.
-(add-to-list 'custom-theme-load-path "~/ethemes/color-theme-gooseberry-tomorrow")
 (setq-default custom-enabled-themes '(gooseberry-tomorrow-idle))
 ;; (setq-default custom-enabled-themes '(sanityinc-solarized-dark))
 
