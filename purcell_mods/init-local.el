@@ -3,7 +3,10 @@
 ;; -----------------------------------
 
 ;; Use a nice font
-(set-frame-font "DejaVu Sans Mono-13")
+(set-frame-font "DejaVu Sans Mono-12")
+
+;; Scroll single line
+(setq scroll-step 1)
 
 ;; Invoke eshell on startup
 (setq eshell-buffer-name "~$")
@@ -37,6 +40,11 @@
 (defalias 'qrr 'query-replace-regexp)
 (global-set-key [f5] 'call-last-kbd-macro)
 
+;; Add syntax highlighting for Drupal PHP files
+(add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
+
 
 ;; -----------------------------------
 ;; Customizations to add as necessary
@@ -60,7 +68,7 @@
 ;; (add-hook 'term-mode-hook
 ;;           (lambda () (define-key term-raw-map (kbd "C-y") 'term-paste)))
 
-;; Add syntax highlighting for drush make and Drupal PHP files if necessary
+;; Add syntax highlighting for drush make if necessary
 ;; (define-generic-mode
 ;;     'info-mode
 ;;   '(";")  ;; comment
@@ -73,9 +81,8 @@
 ;;   nil
 ;;   "A mode for Drush .make and .info files"
 ;;   )
-;; (add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
-;; (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-;; (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
+
+;; Add syntax highlighting for PHP-like files if necessary
 ;; (add-to-list 'auto-mode-alist '("\\.profile$" . php-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
 
