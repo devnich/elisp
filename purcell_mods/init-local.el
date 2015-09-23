@@ -3,7 +3,7 @@
 ;; -----------------------------------
 
 ;; Use a nice font
-(set-frame-font "DejaVu Sans Mono-12")
+(set-frame-font "DejaVu Sans Mono-13")
 
 ;; Scroll single line
 (setq scroll-step 1)
@@ -44,6 +44,9 @@
 (add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
+
+;; Set debug-on-error to on
+(toggle-debug-on-error)
 
 
 ;; -----------------------------------
