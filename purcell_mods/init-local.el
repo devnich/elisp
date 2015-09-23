@@ -45,9 +45,6 @@
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
 
-;; Set debug-on-error to on
-(toggle-debug-on-error)
-
 
 ;; -----------------------------------
 ;; Customizations to add as necessary
