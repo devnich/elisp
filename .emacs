@@ -128,34 +128,34 @@
 (transient-mark-mode t)
 
 ;; Load autopair in all buffers
-(require 'autopair)
-(autopair-global-mode)
-(add-hook 'shell-script-mode-hook
-          '(lambda () (autopair-mode)))
+;; (require 'autopair)
+;; (autopair-global-mode)
+;; (add-hook 'shell-script-mode-hook
+;;           '(lambda () (autopair-mode)))
 
 ;; Suppress autopair in term mode
-(add-hook 'term-mode-hook
-          #'(lambda ()
-              ;; Disable in <24
-              (setq autopair-dont-activate t)
-              ;; Disable in >=24
-              (autopair-mode -1)))
+;; (add-hook 'term-mode-hook
+;;           #'(lambda ()
+;;               ;; Disable in <24
+;;               (setq autopair-dont-activate t)
+;;               ;; Disable in >=24
+;;               (autopair-mode -1)))
 
 ;; Suppress autopair in js2 mode (redundant)
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              ;; Disable in <24
-              (setq autopair-dont-activate t)
-              ;; Disable in >=24
-              (autopair-mode -1)))
+;; (add-hook 'js2-mode-hook
+;;           #'(lambda ()
+;;               ;; Disable in <24
+;;               (setq autopair-dont-activate t)
+;;               ;; Disable in >=24
+;;               (autopair-mode -1)))
 
 ;; Suppress autopair in groovy mode (use groovy-electric)
-(add-hook 'groovy-mode-hook
-          #'(lambda ()
-              ;; Disable in <24
-              (setq autopair-dont-activate t)
-              ;; Disable in >=24
-              (autopair-mode -1)))
+;; (add-hook 'groovy-mode-hook
+;;           #'(lambda ()
+;;               ;; Disable in <24
+;;               (setq autopair-dont-activate t)
+;;               ;; Disable in >=24
+;;               (autopair-mode -1)))
 
 ;;---------------------------
 ;; Look and feel customizations
