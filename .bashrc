@@ -97,3 +97,7 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+export EDITOR="emacs"
+export JAVA_HOME="/home/gilgamesh/jdk1.8.0_45"
+export TERM=xterm-256color
