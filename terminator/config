@@ -1,6 +1,6 @@
 [global_config]
-  window_state = fullscreen
-  borderless = True
+  window_state = maximise
+  borderless = False
 [keybindings]
   copy = <Ctrl><Shift>w
   paste = <Ctrl><Shift>y
