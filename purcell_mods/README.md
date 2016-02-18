@@ -8,4 +8,4 @@ Currently the overwritten/copied init files are:
 * init-preload-local.el
 * init-themes.el
 
-Is buffer swapping different in new version? Check dired customizations at work
+Is buffer swapping different in new version? Check dired customizations or ibuffer-other-buffer at work
