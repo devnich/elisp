@@ -8,4 +8,13 @@ Currently the overwritten/copied init files are:
 * init-preload-local.el
 * init-themes.el
 
-Is buffer swapping different in new version? Check dired customizations or ibuffer-other-buffer at work
+Is buffer swapping different in new version? Check dired customizations or ibuffer-other-buffer at work:
+
+./init-ibuffer.el:58:(global-set-key (kbd "C-x C-b") 'ibuffer)
+Check whether new version uses 'ibuffer-other-window
+
+;; (require-package 'fullframe)
+;; (after-load 'ibuffer
+;;  (fullframe ibuffer ibuffer-quit))
+
+Full-framing is probably called in new version
