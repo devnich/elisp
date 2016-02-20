@@ -4,6 +4,7 @@
 
 Currently the overwritten/copied init files are:
 * .dir-locals.el
+* init-ibuffer.el
 * init-local.el
 * init-preload-local.el
 * init-themes.el
