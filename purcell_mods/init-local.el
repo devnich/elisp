@@ -45,6 +45,8 @@
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
 
+;; Use python 3 as the default interpreter
+(setq python-shell-interpreter "python3.5")
 
 ;; -----------------------------------
 ;; Customizations to add as necessary
